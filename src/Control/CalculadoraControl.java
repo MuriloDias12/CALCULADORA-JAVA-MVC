@@ -1,51 +1,28 @@
 package Control;
 
-import Model.Operacao;
-import Model.Soma;
-import Model.Subtracao;
-import Model.Multiplicacao;
-import Model.Divisao;
-import View.CalculadoraView;
+import Model.*;
 
 public class CalculadoraControl {
-    private CalculadoraView View;
+    public double calcular(double num1, double num2, String operacao) {
+        Operacao operacaoMatematica = null;
 
-    public CalculadoraControl(CalculadoraView view) {
-        this.View = view;
-    }
-
-    public void iniciar() {
-        View.exibirMenu();
-        int opcao = View.lerOpcao();
-
-        double num1 = View.lerNumero("Digite o primeiro número: ");
-        double num2 = View.lerNumero("Digite o segundo número: ");
-
-        Operacao operacao = null;
-
-        switch (opcao) {
-            case 1:
-                operacao = new Soma();
+        switch (operacao) {
+            case "soma":
+                operacaoMatematica = new Soma();
                 break;
-            case 2:
-                operacao = new Subtracao();
+            case "subtracao":
+                operacaoMatematica = new Subtracao();
                 break;
-            case 3:
-                operacao = new Multiplicacao();
+            case "multiplicacao":
+                operacaoMatematica = new Multiplicacao();
                 break;
-            case 4:
-                operacao = new Divisao();
+            case "divisao":
+                operacaoMatematica = new Divisao();
                 break;
             default:
-                View.exibirMensagem("Opção inválida!");
-                return;
+                throw new IllegalArgumentException("Operação inválida!");
         }
 
-        try {
-            double resultado = operacao.calcular(num1, num2);
-            View.exibirResultado(resultado);
-        } catch (ArithmeticException e) {
-            View.exibirMensagem(e.getMessage());
-        }
+        return operacaoMatematica.calcular(num1, num2);
     }
 }

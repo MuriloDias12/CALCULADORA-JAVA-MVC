@@ -1,14 +1,10 @@
 package Application;
 
-
-import View.CalculadoraView;
-import Control.CalculadoraControl;
+import View.CalculadoraGUI;
 
 public class Main {
     public static void main(String[] args) {
-        CalculadoraView view = new CalculadoraView();
-        CalculadoraControl control = new CalculadoraControl(view);
-
-        control.iniciar();
+        // Inicia a interface gráfica
+        CalculadoraGUI.main(args);
     }
 }
